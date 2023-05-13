@@ -1,7 +1,15 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        # Convert string to lowercase and remove non-alphanumeric characters
-        s = ''.join(filter(str.isalnum, s)).lower()
-        
-        # Check if string is equal to its reverse
-        return s == s[::-1]
+        l, r = 0, len(s) - 1
+
+        while l < r:
+            while l < r and not s[l].isalnum():
+                l+=1
+            while l < r and not s[r].isalnum():
+                r-=1
+            if s[l].lower() != s[r].lower():
+                return False
+            l+=1
+            r-=1
+
+        return True 
