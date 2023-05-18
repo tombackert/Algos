@@ -2,6 +2,14 @@
 # Space complexity: O(1)
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        if not list1:
+            return list2
+        if not list2:
+            return list1
+        
+        if list1.val > list2.val:
+            list1, list2 = list2, list1 
+
         dummy = ListNode()
         curr = dummy
 
@@ -14,9 +22,6 @@ class Solution:
                 list2 = list2.next
             curr = curr.next
 
-        if list1:
-            curr.next = list1
-        elif list2:
-            curr.next = list2
+        curr.next = list1 if list1 else list2 
 
         return dummy.next
